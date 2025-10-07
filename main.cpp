@@ -7,9 +7,7 @@ using namespace std;
 
 int main() {
 
-    //==============================
-    // 1970年の山手線（西日暮里・高輪ゲートウェイなし）
-    //==============================
+    // 1970年の山手線
     list<const char*> lst1970{
         "Tokyo","Kanda","Akihabara","Okachimachi","Ueno","Uguisudani",
         "Nippori","Tabata","Komagome","Sugamo","Otsuka","Ikebukuro",
@@ -18,15 +16,13 @@ int main() {
         "Shinagawa","Tamachi","Hamamatsucho","Shimbashi","Yurakucho\n"
     };
 
-    // --- 1970年の駅一覧を表示 ---
+    //1970年の駅一覧を表示
     printf("1970\n");
     for (const char* name : lst1970) {
-        printf("%s,", name);  // 各駅名を1行ずつ出力
+        printf(",%s", name);  // 各駅名を1行ずつ出力
     }
 
-    //==============================
-    // 2019年の山手線（西日暮里追加）
-    //==============================
+    // 2019年の山手線
     list<const char*> lst2019 = lst1970;  // 1970年のリストをコピーしてスタート
 
     // --- 「Nippori」の次に「Nishi-Nippori（西日暮里）」を挿入 ---
@@ -38,15 +34,13 @@ int main() {
         }
     }
 
-    // --- 2019年の駅一覧を表示 ---
+    //2019年の駅一覧を表示
     printf("\n2019\n");
     for (const char* name : lst2019) {
-        printf("%s,", name);
+        printf(",%s", name);
     }
 
-    //==============================
-    // 2022年の山手線（西日暮里＋高輪ゲートウェイ追加）
-    //==============================
+    // 2022年の山手線
     list<const char*> lst2022 = lst2019;  // 2019年のリストをコピー
 
     // --- 「Shinagawa」の次に「Takanawa Gateway（高輪ゲートウェイ）」を挿入 ---
@@ -58,10 +52,10 @@ int main() {
         }
     }
 
-    // --- 2022年の駅一覧を表示 ---
+    //2022年の駅一覧を表示
     printf("\n2022\n");
     for (const char* name : lst2022) {
-        printf("%s,", name);
+        printf(",%s", name);
     }
 
     return 0;
