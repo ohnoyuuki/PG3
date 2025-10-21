@@ -1,32 +1,50 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <windows.h>
 
-// 再帰関数の定義
-int Recursive(int kyuuryou, int zikan, int kotei) {
+// コールバック関数のプロトタイプ宣言
+void (*Callback)(int result);
 
-    if (kyuuryou >= kotei) {
-        printf("%d時間後に超える\n", zikan);
-        return zikan;
-    }
-
-    // 現在の給料と固定給を表示
-    printf("時給: %d円　固定給: %d円\n", kyuuryou, kotei);
-
-    // 次の時間の給料を計算
-    kyuuryou = kyuuryou * 2 - 50;
-
-    // 再帰呼び出し（時間を1増やす）
-    return Recursive(kyuuryou, zikan + 1, kotei);
+// サイコロの出目を決定する関数
+int roll_dice() {
+    // 1～6のランダムな整数を返す
+    return rand() % 6 + 1;
 }
 
+// 判定を行うコールバック関数
+void judge_result(int result) {
+
+    int input;
+
+    printf("サイコロの出目が奇数(1)か偶数(2)か入力:");
+    scanf_s("%d", &input);
+
+    printf("判定中...\n");
+
+    Sleep(3000);
+
+    if ((result % 2 == 1 && input == 1) || (result % 2 == 0 && input == 2)) {
+        printf("正解\n");
+    } else {
+        printf("不正解\n");
+    }
+
+    printf("サイコロの目は%d\n", result);
+}
+
+// メイン関数
 int main() {
 
-    int saiki = 100;   // 最初の時給
-    int ippan = 1226;  // 一般的な時給
-    int zikan = 1;     // 1時間目スタート
+    srand((int)time(NULL));
 
-    int result = Recursive(saiki, zikan, ippan);
+    int dice_result = roll_dice();
 
-    printf("結果: %d時間後に超えた\n", result);
+    // コールバック関数に実行したい関数のアドレスを代入
+    Callback = judge_result;
+
+    // サイコロの結果を引数にして関数ポインタ経由で呼び出し
+    Callback(dice_result);
 
     return 0;
 }
