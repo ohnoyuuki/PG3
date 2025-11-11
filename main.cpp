@@ -1,28 +1,41 @@
-#include"TemplateClass.h"
+#include <cstdio>
+
+using namespace std;
+
+// 動物クラス
+class Animal {
+public:
+    // 鳴く関数（純粋仮想関数）
+    virtual void sound() const = 0;
+};
+
+// 犬クラス
+class Dog : public Animal {
+public:
+    void sound() const override {
+        printf("イヌ鳴き声：ワン\n");
+    }
+};
+
+// 猫クラス
+class Cat : public Animal {
+public:
+    void sound() const override {
+        printf("ネコ鳴き声：ニャー\n");
+    }
+};
 
 int main() {
 
-    // テンプレートから6種類のクラスを定義
-    TemplateClass<int, float>   intFloatTemplate(100, 50.0f);      //①
-    TemplateClass<int, double>  intDoubleTemplate(80, 20.0);       //②
-    TemplateClass<float, int>   floatIntTemplate(2.0f, 18);        //③
-    TemplateClass<float, double> floatDoubleTemplate(11.0f, 3.5);  //④
-    TemplateClass<double, int>  doubleIntTemplate(234.0, 123);     //⑤
-    TemplateClass<double, float> doubleFloatTemplate(400.1, 500.2f); //⑥
+    // 動物クラスのポインタ（実際はDogとCatを指す）
+    Animal* animal1 = new Dog();
+    Animal* animal2 = new Cat();
 
-    std::cout << "int(100)とfloat(50.0f)を比べて小さい数字を返す："
-        << intFloatTemplate.Min() << std::endl;
-    std::cout << "int(80)とdouble(20.0)を比べて小さい数字を返す："
-        << intDoubleTemplate.Min() << std::endl;
-    std::cout << "float(2.0f)とint(18)を比べて小さい数字を返す："
-        << floatIntTemplate.Min() << std::endl;
-    std::cout << "float(11.0f)とdouble(3.5)を比べて小さい数字を返す："
-        << floatDoubleTemplate.Min() << std::endl;
-    std::cout << "double(234.0)とint(123)を比べて小さい数字を返す："
-        << doubleIntTemplate.Min() << std::endl;
-    std::cout << "double(400.1)とfloat(500.2)を比べて小さい数字を返す："
-        << doubleFloatTemplate.Min() << std::endl;
+    animal1->sound();  // 実際はDogのsound()が呼ばれる
+    animal2->sound();  // 実際はCatのsound()が呼ばれる
+
+    delete animal1;
+    delete animal2;
 
     return 0;
 }
-
