@@ -1,10 +1,33 @@
-#include<iostream>
-#include<windows.h>
+#include <stdio.h>
+#include "IShape.h"
+#include "Circle.h"
+#include "Rectangle.h"
 
-int main(){
-	SetConsoleOutputCP(65001);
-	char str[] = "ソ";
-	printf("%s", str);
-	return 0;
+int main(void) {
 
+    IShape* shape[2];
+
+    shape[0] = new Circle;
+    shape[1] = new Rectangle;
+
+    printf("円の半径:4\n四角形の底辺:2\n四角形の高さ:3\n\n");
+
+    // 面積を計算
+    for (int i = 0; i < 2; i++) {
+        shape[i]->Size();
+    }
+
+    printf("\n");
+
+    // 面積を表示
+    for (int i = 0; i < 2; i++) {
+        shape[i]->Draw();
+    }
+
+    // メモリ解放
+    for (int i = 0; i < 2; i++) {
+        delete shape[i];
+    }
+
+    return 0;
 }
