@@ -5,5 +5,5 @@ void Rectangle::Size() {
 }
 
 void Rectangle::Draw() {
-    printf("四角形の面積：%d\n", answer);
+    printf("短形の面積：%d\n", answer);
 }
